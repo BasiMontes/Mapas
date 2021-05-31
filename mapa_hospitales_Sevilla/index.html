@@ -1,0 +1,473 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/filter.css">
+<link rel="stylesheet" href="css/nouislider.min.css">
+        <style>
+        #map {
+            width: 1547px;
+            height: 876px;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/tailDT.js"></script>
+<script src="js/nouislider.min.js"></script>
+<script src="js/wNumb.js"></script>
+        <script src="data/isocronas_coche_0.js"></script>
+        <script src="data/isocronas_peaton_1.js"></script>
+        <script src="data/hosp_sev_3.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[37.329684183288585,-6.050344601007621],[37.430096901411765,-5.826965689848933]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        function pop_isocronas_coche_0(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">id</th>\
+                        <td>' + (feature.properties['id'] !== null ? autolinker.link(feature.properties['id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>origin_id</strong><br />' + (feature.properties['origin_id'] !== null ? autolinker.link(feature.properties['origin_id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">range</th>\
+                        <td>' + (feature.properties['range'] !== null ? autolinker.link(feature.properties['range'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">metric</th>\
+                        <td>' + (feature.properties['metric'] !== null ? autolinker.link(feature.properties['metric'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">mode</th>\
+                        <td>' + (feature.properties['mode'] !== null ? autolinker.link(feature.properties['mode'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">traffic</th>\
+                        <td>' + (feature.properties['traffic'] !== null ? autolinker.link(feature.properties['traffic'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['timestamp'] !== null ? autolinker.link(feature.properties['timestamp'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">type</th>\
+                        <td>' + (feature.properties['type'] !== null ? autolinker.link(feature.properties['type'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_isocronas_coche_0_0(feature) {
+            if (feature.properties['range'] >= 0.000000 && feature.properties['range'] <= 60.000000 ) {
+                return {
+                pane: 'pane_isocronas_coche_0',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.5)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,255,69,0.5)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['range'] >= 61.000000 && feature.properties['range'] <= 120.000000 ) {
+                return {
+                pane: 'pane_isocronas_coche_0',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.5)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(253,108,4,0.5)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['range'] >= 121.000000 && feature.properties['range'] <= 180.000000 ) {
+                return {
+                pane: 'pane_isocronas_coche_0',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.5)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(231,0,50,0.5)',
+                interactive: true,
+            }
+            }
+        }
+        map.createPane('pane_isocronas_coche_0');
+        map.getPane('pane_isocronas_coche_0').style.zIndex = 400;
+        map.getPane('pane_isocronas_coche_0').style['mix-blend-mode'] = 'normal';
+        var layer_isocronas_coche_0 = new L.geoJson(json_isocronas_coche_0, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_isocronas_coche_0',
+            layerName: 'layer_isocronas_coche_0',
+            pane: 'pane_isocronas_coche_0',
+            onEachFeature: pop_isocronas_coche_0,
+            style: style_isocronas_coche_0_0,
+        });
+        bounds_group.addLayer(layer_isocronas_coche_0);
+        map.addLayer(layer_isocronas_coche_0);
+        function pop_isocronas_peaton_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">id</th>\
+                        <td>' + (feature.properties['id'] !== null ? autolinker.link(feature.properties['id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">origin_id</th>\
+                        <td>' + (feature.properties['origin_id'] !== null ? autolinker.link(feature.properties['origin_id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">range</th>\
+                        <td>' + (feature.properties['range'] !== null ? autolinker.link(feature.properties['range'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">metric</th>\
+                        <td>' + (feature.properties['metric'] !== null ? autolinker.link(feature.properties['metric'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">mode</th>\
+                        <td>' + (feature.properties['mode'] !== null ? autolinker.link(feature.properties['mode'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">traffic</th>\
+                        <td>' + (feature.properties['traffic'] !== null ? autolinker.link(feature.properties['traffic'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['timestamp'] !== null ? autolinker.link(feature.properties['timestamp'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['type'] !== null ? autolinker.link(feature.properties['type'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_isocronas_peaton_1_0(feature) {
+            if (feature.properties['range'] >= 0.000000 && feature.properties['range'] <= 300.000000 ) {
+                return {
+                pane: 'pane_isocronas_peaton_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,236,92,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['range'] >= 300.000000 && feature.properties['range'] <= 600.000000 ) {
+                return {
+                pane: 'pane_isocronas_peaton_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,184,3,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['range'] >= 600.000000 && feature.properties['range'] <= 900.000000 ) {
+                return {
+                pane: 'pane_isocronas_peaton_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,94,8,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['range'] >= 900.000000 && feature.properties['range'] <= 1200.000000 ) {
+                return {
+                pane: 'pane_isocronas_peaton_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(234,0,0,1.0)',
+                interactive: true,
+            }
+            }
+        }
+        map.createPane('pane_isocronas_peaton_1');
+        map.getPane('pane_isocronas_peaton_1').style.zIndex = 401;
+        map.getPane('pane_isocronas_peaton_1').style['mix-blend-mode'] = 'normal';
+        var layer_isocronas_peaton_1 = new L.geoJson(json_isocronas_peaton_1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_isocronas_peaton_1',
+            layerName: 'layer_isocronas_peaton_1',
+            pane: 'pane_isocronas_peaton_1',
+            onEachFeature: pop_isocronas_peaton_1,
+            style: style_isocronas_peaton_1_0,
+        });
+        bounds_group.addLayer(layer_isocronas_peaton_1);
+        map.addLayer(layer_isocronas_peaton_1);
+        map.createPane('pane_OSMStandard_2');
+        map.getPane('pane_OSMStandard_2').style.zIndex = 402;
+        var layer_OSMStandard_2 = L.tileLayer('http://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            pane: 'pane_OSMStandard_2',
+            opacity: 0.512,
+            attribution: '<a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors, CC-BY-SA</a>',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 19
+        });
+        layer_OSMStandard_2;
+        map.addLayer(layer_OSMStandard_2);
+        function pop_hosp_sev_3(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">id</th>\
+                        <td>' + (feature.properties['id'] !== null ? autolinker.link(feature.properties['id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">hospital</th>\
+                        <td>' + (feature.properties['hospital'] !== null ? autolinker.link(feature.properties['hospital'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">lat</th>\
+                        <td>' + (feature.properties['lat'] !== null ? autolinker.link(feature.properties['lat'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">lon</th>\
+                        <td>' + (feature.properties['lon'] !== null ? autolinker.link(feature.properties['lon'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_hosp_sev_3_0() {
+            return {
+                pane: 'pane_hosp_sev_3',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(0,6,190,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_hosp_sev_3');
+        map.getPane('pane_hosp_sev_3').style.zIndex = 403;
+        map.getPane('pane_hosp_sev_3').style['mix-blend-mode'] = 'normal';
+        var layer_hosp_sev_3 = new L.geoJson(json_hosp_sev_3, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_hosp_sev_3',
+            layerName: 'layer_hosp_sev_3',
+            pane: 'pane_hosp_sev_3',
+            onEachFeature: pop_hosp_sev_3,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_hosp_sev_3_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_hosp_sev_3);
+        map.addLayer(layer_hosp_sev_3);
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'<img src="legend/hosp_sev_3.png" /> hosp_sev': layer_hosp_sev_3,"OSM Standard": layer_OSMStandard_2,'isocronas_peaton<br /><table><tr><td style="text-align: center;"><img src="legend/isocronas_peaton_1_Menosde5Minutos0.png" /></td><td>Menos de 5 Minutos</td></tr><tr><td style="text-align: center;"><img src="legend/isocronas_peaton_1_Entre510minutos1.png" /></td><td>Entre 5 - 10 minutos</td></tr><tr><td style="text-align: center;"><img src="legend/isocronas_peaton_1_Entre1015minutos2.png" /></td><td>Entre 10 - 15 minutos</td></tr><tr><td style="text-align: center;"><img src="legend/isocronas_peaton_1_Entre1520minutos3.png" /></td><td>Entre 15 - 20 minutos</td></tr></table>': layer_isocronas_peaton_1,'isocronas_coche<br /><table><tr><td style="text-align: center;"><img src="legend/isocronas_coche_0_Menosdeunminuto0.png" /></td><td>Menos de un minuto</td></tr><tr><td style="text-align: center;"><img src="legend/isocronas_coche_0_Entre12minutos1.png" /></td><td>Entre 1 - 2 minutos</td></tr><tr><td style="text-align: center;"><img src="legend/isocronas_coche_0_Entre23minutos2.png" /></td><td>Entre 2 - 3 minutos</td></tr></table>': layer_isocronas_coche_0,},{collapsed:false}).addTo(map);
+        setBounds();
+        var mapDiv = document.getElementById('map');
+        var row = document.createElement('div');
+        row.className="row";
+        row.id="all";
+        row.style.height = "100%";
+        var col1 = document.createElement('div');
+        col1.className="col9";
+        col1.id = "mapWindow";
+        col1.style.height = "99%";
+        col1.style.width = "80%";
+        col1.style.display = "inline-block";
+        var col2 = document.createElement('div');
+        col2.className="col3";
+        col2.id = "menu";
+        col2.style.display = "inline-block";
+        mapDiv.parentNode.insertBefore(row, mapDiv);
+        document.getElementById("all").appendChild(col1);
+        document.getElementById("all").appendChild(col2);
+        col1.appendChild(mapDiv)
+        var Filters = {"metric": "str"};
+        function filterFunc() {
+          map.eachLayer(function(lyr){
+          if ("options" in lyr && "dataVar" in lyr["options"]){
+            features = this[lyr["options"]["dataVar"]].features.slice(0);
+            try{
+              for (key in Filters){
+                keyS = key.replace(/[^a-zA-Z0-9_]/g, "")
+                if (Filters[key] == "str" || Filters[key] == "bool"){
+                  var selection = [];
+                  var options = document.getElementById("sel_" + keyS).options
+                  for (var i=0; i < options.length; i++) {
+                    if (options[i].selected) selection.push(options[i].value);
+                  }
+                    try{
+                      if (key in features[0].properties){
+                        for (i = features.length - 1;
+                          i >= 0; --i){
+                          if (selection.indexOf(
+                          features[i].properties[key])<0
+                          && selection.length>0) {
+                          features.splice(i,1);
+                          }
+                        }
+                      }
+                    } catch(err){
+                  }
+                }
+                if (Filters[key] == "int"){
+                  sliderVals =  document.getElementById(
+                    "div_" + keyS).noUiSlider.get();
+                  try{
+                    if (key in features[0].properties){
+                    for (i = features.length - 1; i >= 0; --i){
+                      if (parseInt(features[i].properties[key])
+                          < sliderVals[0]
+                          || parseInt(features[i].properties[key])
+                          > sliderVals[1]){
+                            features.splice(i,1);
+                          }
+                        }
+                      }
+                    } catch(err){
+                    }
+                  }
+                if (Filters[key] == "real"){
+                  sliderVals =  document.getElementById(
+                    "div_" + keyS).noUiSlider.get();
+                  try{
+                    if (key in features[0].properties){
+                    for (i = features.length - 1; i >= 0; --i){
+                      if (features[i].properties[key]
+                          < sliderVals[0]
+                          || features[i].properties[key]
+                          > sliderVals[1]){
+                            features.splice(i,1);
+                          }
+                        }
+                      }
+                    } catch(err){
+                    }
+                  }
+                if (Filters[key] == "date"
+                  || Filters[key] == "datetime"
+                  || Filters[key] == "time"){
+                  try{
+                    if (key in features[0].properties){
+                      HTMLkey = key.replace(/[&\/\\#,+()$~%.'":*?<>{} ]/g, '');
+                      startdate = document.getElementById("dat_" +
+                        HTMLkey + "_date1").value.replace(" ", "T");
+                      enddate = document.getElementById("dat_" +
+                        HTMLkey + "_date2").value.replace(" ", "T");
+                      for (i = features.length - 1; i >= 0; --i){
+                        if (features[i].properties[key] < startdate
+                          || features[i].properties[key] > enddate){
+                          features.splice(i,1);
+                        }
+                      }
+                    }
+                  } catch(err){
+                  }
+                }
+              }
+            } catch(err){
+            }
+          this[lyr["options"]["layerName"]].clearLayers();
+          this[lyr["options"]["layerName"]].addData(features);
+          }
+          })
+        }
+            document.getElementById("menu").appendChild(
+                document.createElement("div"));
+            var div_metric = document.createElement('div');
+            div_metric.id = "div_metric";
+            div_metric.className= "filterselect";
+            document.getElementById("menu").appendChild(div_metric);
+            sel_metric = document.createElement('select');
+            sel_metric.multiple = true;
+            sel_metric.size = 1;
+            sel_metric.id = "sel_metric";
+            var metric_options_str = "<option value='' unselected></option>";
+            sel_metric.onchange = function(){filterFunc()};
+            metric_options_str  += '<option value="time">time</option>';
+            sel_metric.innerHTML = metric_options_str;
+            div_metric.appendChild(sel_metric);
+            var lab_metric = document.createElement('div');
+            lab_metric.innerHTML = 'metric';
+            lab_metric.className = 'filterlabel';
+            div_metric.appendChild(lab_metric);
+            var reset_metric = document.createElement('div');
+            reset_metric.innerHTML = 'clear filter';
+            reset_metric.className = 'filterlabel';
+            reset_metric.onclick = function() {
+                var options = document.getElementById("sel_metric").options;
+                for (var i=0; i < options.length; i++) {
+                    options[i].selected = false;
+                }
+                filterFunc();
+            };
+            div_metric.appendChild(reset_metric);
+        </script>
+    </body>
+</html>
